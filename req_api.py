@@ -26,6 +26,32 @@ def ocr_space_file(filename, overlay=True, api_key='K82693734788957', language='
                           
                           )
     return r.content.decode()
+# Extract plain text from the OCR JSON response
+def extract_plain_text(json_response):
+    """Extract plain text from the OCR JSON response."""
+    try:
+        data = json.loads(json_response)
+        parsed_results = data.get('ParsedResults', [])
+        
+        if not parsed_results:
+            return "No text found in the image."
+        
+        plain_text = ""
+        for result in parsed_results:
+            plain_text += result.get('ParsedText', '') + '\n'
+        return plain_text.strip()
+    except json.JSONDecodeError as e:
+        return f"Error decoding JSON: {str(e)}"
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
 
-test_file = ocr_space_file(filename='example_image.png', language='eng')
-print(test_file)
+
+filename = '/content/example.png'  
+
+
+test_file = ocr_space_file(filename=filename, language='eng')
+
+
+plain_text = extract_plain_text(test_file)
+print(plain_text)
+
