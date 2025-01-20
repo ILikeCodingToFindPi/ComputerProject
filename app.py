@@ -3,13 +3,15 @@ from tkinter import Canvas, colorchooser, filedialog, messagebox
 from tkinter.simpledialog import askstring
 from PIL import Image, ImageDraw, ImageTk
 from collections import deque
+import main_window_gui
 
 class NotebookGUI(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("Notebook GUI")
+        self.title("Buddhi.AI ~ Notepad")
         self.geometry("1000x800")
+        self.iconbitmap(bitmap="Buddhi.ico")
 
         self.pen_color = "black"
         self.pen_width = 2
@@ -107,7 +109,7 @@ class NotebookGUI(tk.Tk):
             if self.last_x and self.last_y:
                 self.canvas.create_line(self.last_x, self.last_y, event.x, event.y, fill=self.bg_color, width=self.eraser_width)
                 self.draw_image.line((self.last_x, self.last_y, event.x, event.y), fill=self.bg_color, width=self.eraser_width)
-        
+            
         self.last_x, self.last_y = event.x, event.y
 
     def reset(self, event):
