@@ -1,13 +1,14 @@
 import customtkinter as tk
 from customtkinter import *
 from PIL import Image
+import app2
 
 tk.set_appearance_mode("light")
 
 app = tk.CTk()
 app.title("Welcome to Buddhi AI! ~ Onboarding Screen")
 app.grid_rowconfigure(0, weight=1)
-app.iconbitmap(bitmap="Buddhi.ico")
+
 
 #display logo
 start_img=CTkImage(light_image=Image.open("BuddhiAi.png"), size=(500,500))
@@ -17,6 +18,8 @@ disp.grid(row=0, column=0)
 #display button to move to main window
 def starter():
     app.destroy()
+    app3 = app2.App()
+    app3.mainloop()
 
 def ender():
     app.destroy()
